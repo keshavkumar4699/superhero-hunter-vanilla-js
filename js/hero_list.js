@@ -26,7 +26,9 @@ function set_data(data) {
           <button onclick="redirect_detail('${
             element.id
           }')" class="btn btn-info">Know more...</button>
-          <a href="#" class="btn btn-outline-danger"><i class="fa-regular fa-heart"></i></a>
+          <button onclick="mark_favorite('${
+            element.id
+          }')" class="fav-button btn btn-outline-danger" id="fav-${element.id}"><i class="fa-regular fa-heart"></i></button>
         </div>
       </div>
     </div>`;
@@ -36,6 +38,56 @@ function set_data(data) {
 async function redirect_detail(id) {
   localStorage.setItem("details_id", id);
   window.location.href = "http://127.0.0.1:3000/details.html";
+}
+
+// function mark_favorite(id) {
+//   // localStorage.clear();
+//   // return;
+//   let fav_array = [];
+//   const retrievedArrayString = localStorage.getItem("favArray");
+//   console.log(JSON.parse(retrievedArrayString));
+
+//   if (retrievedArrayString != null) {
+//     var favorites = JSON.parse(retrievedArrayString);
+//     if (typeof favorites == "number") {
+//       fav_array.push(favorites);
+//     } else {
+//       console.log(fav_array);
+//       fav_array = favorites;
+//     }
+//   }
+
+//   let index = fav_array.indexOf(id);
+//   const fav_btn = document.querySelector(".fav-button");
+
+//   if (index != -1) {
+//     fav_array.splice(index, 1);
+//     fav_btn.innerHTML = `<i class="fa-regular fa-heart">`;
+//   } else {
+//     fav_array.push(id.toString());
+//     // localStorage.setItem(`fav_${id}`, id);
+//     fav_btn.innerHTML = `<i class="fa-solid fa-heart">`;
+//   }
+
+//   localStorage.setItem("favArray", fav_array);
+// }
+
+let fav_array = [];
+
+function mark_favorite(id) {
+
+  const fav_btn = document.querySelector(`#fav-${id}`);
+
+  if (!fav_array.includes(id)) {
+    fav_array.push(id);
+    fav_btn.innerHTML = `<i class="fa-solid fa-heart">`;
+  } else {
+    const index = fav_array.indexOf(id);
+    fav_array.splice(index, 1);
+    fav_btn.innerHTML = `<i class="fa-regular fa-heart">`;
+  }
+  localStorage.setItem("fav_array", fav_array);
+  // fav_array = (localStorage.getItem("fav_array")).split(",");
 }
 
 fetch_data();
