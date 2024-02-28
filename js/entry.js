@@ -1,8 +1,12 @@
+//function to excute for animation on entry page
 document.addEventListener("DOMContentLoaded", function () {
   const particleConatainer = document.querySelector(".boxes");
 
+  //function to create particles in background
   const createParticle = () => {
+    //animations and setup for particles in background
     const particle = document.createElement("div");
+
     particle.className = "particle";
     particle.innerHTML = '<i class="fa-solid fa-star-of-life"></i>';
     particle.style.left = Math.random() * window.innerWidth + "px";
@@ -15,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
+  //function to create particle with time
   let counter = 0;
   const spawnParticles = () => {
     const intervalId = setInterval(() => {

@@ -1,17 +1,20 @@
+//funtion to fetch details from API
 async function fetch_detail() {
-  const id = localStorage.getItem("details_id");
+  const id = localStorage.getItem("details_id"); //get id of superhero from local storage
+  //fetch details of character from API with ID
   const data = await fetch(
     `https://gateway.marvel.com/v1/public/characters/${id}?apikey=9ab871748d83ae2eb5527ffd69e034de&hash=6a93db3efac6508992da22c6e5c65e04&ts=1708954934&limit=100&offset=0`
   )
-    .then((res) => res.json())
-    .then((data) => data.data.results);
+    .then((res) => res.json())//convert response to JSON format
+    .then((data) => data.data.results); //get results from JSON response
 
-  console.log(data);
-  set_details(data);
+  set_details(data); //set details based on data fetched from API
 }
 
+//function to set details in HTML
 function set_details(data) {
-  const details = document.querySelector(".details");
+  const details = document.querySelector(".details"); //fetch HTML tag with classname
+  //travese each element in data
   data.forEach((element) => {
     details.innerHTML = `<div class="row g-0">
         <div class="col-md-4">
