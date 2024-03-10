@@ -70,9 +70,21 @@ function set_data(data) {
   return data;
 }
 
-//handle data promise and then setdata to html
-fetch_data().then((data) => {
-  set_data(data);
+document.addEventListener("DOMContentLoaded", function () {
+  
+  //to mark favorites
+  fav_array = localStorage.getItem("fav_array");
+
+  if (fav_array==null) {
+    fav_array = [];
+  } else {
+    fav_array = fav_array.split(",");
+  }
+
+  //handle data promise and then setdata to html
+  fetch_data().then((data) => {
+    set_data(data);
+  });
 });
 
 //for redirecting to details page
@@ -80,9 +92,6 @@ async function redirect_detail(id) {
   localStorage.setItem("details_id", id);
   window.location.href = "http://127.0.0.1:3000/details.html";
 }
-
-//to mark favorites
-fav_array = localStorage.getItem("fav_array").split(",");
 
 //function to mark favorite when favorites button is clicked and change appearanc of button
 function mark_favorite(id) {
@@ -109,7 +118,7 @@ let input = document.querySelector("#search");
 //search for every key entered in input box
 input.addEventListener("keyup", async function (e) {
   let data = await fetch_data(); //fetch whole data from api
-  let searchString = e.target.value.toLowerCase();//convert search string to lowercase
+  let searchString = e.target.value.toLowerCase(); //convert search string to lowercase
   //filter data items based on keys entered
   let filterData = data.filter((item) => {
     return item.name.toLowerCase().includes(searchString);

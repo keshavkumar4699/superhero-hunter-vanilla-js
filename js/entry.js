@@ -34,3 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   spawnParticles();
 });
+
+function redirect(){
+  window.location.href = "http://127.0.0.1:3000/hero_list.html";
+  // window.location.href = 'https://superhero-hunter-vanilla-js.onrender.com/hero_list.html';
+}
