@@ -50,7 +50,8 @@ function set_data(element) {
 //funtion to redirect to details page when button(know more...) is clicked of character
 async function redirect_detail(id) {
   localStorage.setItem("details_id", id);
-  window.location.href = "http://127.0.0.1:3000/details.html";
+  window.location.href =
+    "https://superhero-hunter-vanilla-js.onrender.com/details.html";
 }
 
 //function to mark favorite when favorites button is clicked and change appearanc of button
